@@ -3,21 +3,34 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   margin: 0;
+  background: #ffffff;
 }
 
 a {
   text-decoration: none;
 }
 
+header {
+  padding: 10px;
+}
+svg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5vw;
+}
+
+.container-image > img {
+  padding: 20px;
+}
 .container-global {
   text-align: center;
   background: linear-gradient(135deg, #fff8dc 0%, #ffdead 100%);
   margin: 0;
   height: 100%;
-}
-
-.container-global h1 {
-  margin-top: 100px;
+  min-height: 300px;
+  position: relative;
 }
 
 .main-landing {
@@ -39,4 +52,21 @@ a {
   height: 100px;
   background: #a4dc88;
   margin: 50px auto;
+}
+
+.card {
+  max-width: 250px;
+}
+@media (max-width: 700px) {
+  .main-landing {
+    flex-direction: column;
+    align-items: center;
+  }
+  .main-left,
+  .main-right {
+    width: 100%;
+  }
+  .container-image-hero {
+    margin: auto;
+  }
 }
