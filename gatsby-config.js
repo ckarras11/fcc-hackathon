@@ -25,6 +25,12 @@ module.exports = {
         icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
       },
     },
+    {
+      resolve: `@wapps/gatsby-plugin-material-ui`,
+      options: {
+        // Add any options here
+      },
+    },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify-identity-widget',
   ],
