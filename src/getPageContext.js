@@ -19,7 +19,7 @@ const theme = createMuiTheme({
   },
 })
 
-window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true
+/* window.__MUI_USE_NEXT_TYPOGRAPHY_VARIANTS__ = true */
 
 function createPageContext() {
   return {
