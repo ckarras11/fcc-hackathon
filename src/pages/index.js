@@ -1,16 +1,19 @@
 import React from 'react'
-import Link from 'gatsby-link'
+import { Link } from 'gatsby'
+
+import Layout from '../components/layout'
+import Image from '../components/image'
 
 const IndexPage = () => (
-  <div>
-    <h1>Hello</h1>
-    <p>This project is for the FCC Hackathon on October 27-28</p>
-    <p>
-      My name is Christopher Karras and I work as a web applications developer
-      for a non-profit. This will be my first hackathon
-    </p>
+  <Layout>
+    <h1>Hi people</h1>
+    <p>Welcome to your new Gatsby site.</p>
+    <p>Now go build something great.</p>
+    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
+      <Image />
+    </div>
     <Link to="/page-2/">Go to page 2</Link>
-  </div>
+  </Layout>
 )
 
 export default IndexPage
