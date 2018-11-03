@@ -2,22 +2,36 @@ import React from 'react'
 import { Link } from 'gatsby'
 import Button from '@material-ui/core/Button'
 
-import Layout from '../components/layout'
-import Image from '../components/image'
+import Logo from '../components/logo'
+import Hero from '../components/hero'
+import withRoot from '../withRoot'
+import '../styles/landing.css'
 
 const IndexPage = () => (
-  <Layout>
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: '300px', marginBottom: '1.45rem' }}>
-      <Image />
-    </div>
-    <Button variant="contained" color="primary">
-      Hello World
-    </Button>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
+  <div className="container-global">
+    <header>
+      <div className="container-image" style={{ maxWidth: '150px' }}>
+        <Logo />
+      </div>
+    </header>
+    <main className="main-landing">
+      <div className="main-left">
+        <h1>Welcome to SpareChange</h1>
+        <p>Click the button below to go to your Dashboard</p>
+
+        <Link to="/Dashboard">
+          <Button variant="contained" color="primary">
+            Dashboard
+          </Button>
+        </Link>
+      </div>
+      <div className="main-right">
+        <div className="container-image" style={{ maxWidth: '250px' }}>
+          <Hero />
+        </div>
+      </div>
+    </main>
+  </div>
 )
 
-export default IndexPage
+export default withRoot(IndexPage)
