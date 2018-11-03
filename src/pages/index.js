@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Logo from '../components/logo'
 import Hero from '../components/hero'
 import withRoot from '../withRoot'
-import { getAllExpenses } from '../utils/hasura'
+import { getAllExpenses, getExpenses, addExpense } from '../utils/hasura'
 import '../styles/landing.css'
 
 const IndexPage = ({ classes }) => (
@@ -56,6 +56,17 @@ const IndexPage = ({ classes }) => (
   </React.Fragment>
 )
 
-getAllExpenses()
+// getAllExpenses().then(res => console.log(res))
+// getExpenses(1).then(res => console.log(res))
+
+const expense = {
+  name: 'Test from index.js',
+  description: 'I hope this works :)',
+  amount: 55.55,
+  date: "2018-10-30",
+  userID: 1
+}
+
+addExpense(expense).then(res => console.log(res))
 
 export default withRoot(IndexPage)

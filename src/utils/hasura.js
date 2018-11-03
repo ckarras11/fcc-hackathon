@@ -3,19 +3,18 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
-export const getExpenses = userID => {
-  const graphiql = JSON.stringify(`
-        expense (
-          where: {user_id: {_eq: ${userID} }}
-        ) {
-          id
-          name
-          description
-          user_id
-        }`)
-
+export const getExpenses = (userID) => {
   const query = {
-    query: graphiql,
+    'query': `
+    {
+      expense (
+        where: {user_id: {_eq: ${userID} }}
+      ) {
+        id
+        name
+        description
+      }
+    }`
   }
 
   return fetch(api, {
@@ -23,31 +22,55 @@ export const getExpenses = userID => {
     headers,
     body: JSON.stringify(query),
   })
-    .then(data => console.log(data))
+    .then(res => res.json())
     .catch(e => console.log(e))
 }
 
 export const getAllExpenses = () => {
-  const graphiql = `
-        expense {
-            id
-            name
-            description
-            user_id
-        }
-        `
-
-  console.log(graphiql)
-
   const query = {
-    query: JSON.stringify(graphiql),
+    'query': `
+    {
+      expense {
+      id
+      name
+      description
+      user_id
+      }
+    }`
   }
 
   return fetch(api, {
     method: 'POST',
     headers,
-    body: query,
+    body: JSON.stringify(query),
   })
-    .then(data => console.log(data))
+    .then(res => res.json())
+    .catch(e => console.log(e))
+}
+
+export const addExpense = (expense) => {
+  console.log(expense)
+  const query = {
+    'query': `mutation
+      {
+        insert_expense(objects: [{name: "${expense.name}", description: "${expense.description}", amount: ${expense.amount}, date: "2018-11-01", user_id: ${expense.userID}}]) {
+          returning {
+            id
+            name
+            description
+            user_id
+          }
+        }
+      }
+    `
+  }
+  console.log(query)
+
+  return fetch(api, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(query),
+  })
+    .then(res => res.json())
     .catch(e => console.log(e))
 }
