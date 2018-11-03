@@ -18,9 +18,9 @@ import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import { Link } from 'gatsby'
-import Image from './image'
+import Logo from './logo'
 
-const drawerWidth = 240
+const drawerWidth = 220
 
 const styles = theme => ({
   root: {
@@ -34,6 +34,8 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    background:
+      ' linear-gradient(to left, #b7b3a5, #c3c0b5, #cfcec6, #dcdbd6, #e9e9e7);',
   },
   menuButton: {
     marginRight: 20,
@@ -120,9 +122,11 @@ class SideBar extends React.Component {
             >
               <MenuIcon />
             </IconButton>
-            <div style={{ width: '120px' }}>
-              <Image />
-            </div>
+            <Link to="/">
+              <div style={{ width: '120px' }}>
+                <Logo />
+              </div>
+            </Link>
             {auth && (
               <div>
                 <IconButton
