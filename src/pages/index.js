@@ -8,7 +8,7 @@ import CardContent from '@material-ui/core/CardContent'
 import Logo from '../components/logo'
 import Hero from '../components/hero'
 import withRoot from '../withRoot'
-import { getAllExpenses, getExpenses, addExpense } from '../utils/hasura'
+import { getAllExpenses, getExpenses, addExpense, updateExpense, deleteExpense } from '../utils/hasura'
 import '../styles/landing.css'
 
 const IndexPage = ({ classes }) => (
@@ -60,13 +60,14 @@ const IndexPage = ({ classes }) => (
 // getExpenses(1).then(res => console.log(res))
 
 const expense = {
+  id: '13',
   name: 'Test from index.js',
   description: 'I hope this works :)',
   amount: 55.55,
   date: "2018-10-30",
-  userID: 1
+  userID: 13
 }
 
-addExpense(expense).then(res => console.log(res))
+deleteExpense(expense).then(res => console.log(res)).catch(e => console.log(e))
 
 export default withRoot(IndexPage)

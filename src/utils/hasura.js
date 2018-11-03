@@ -3,6 +3,15 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
+// const callDB = (query) => {
+//   return fetch(api, {
+//   headers,
+//   body: JSON.stringify(query)
+// })
+//   .then(res => res.json())
+//   .catch(e => console.log(e))
+// }
+
 export const getExpenses = (userID) => {
   const query = {
     'query': `
@@ -16,6 +25,8 @@ export const getExpenses = (userID) => {
       }
     }`
   }
+
+  // return callDB(query);
 
   return fetch(api, {
     method: 'POST',
@@ -39,6 +50,8 @@ export const getAllExpenses = () => {
     }`
   }
 
+  // return callDB(query);
+
   return fetch(api, {
     method: 'POST',
     headers,
@@ -49,11 +62,16 @@ export const getAllExpenses = () => {
 }
 
 export const addExpense = (expense) => {
-  console.log(expense)
   const query = {
     'query': `mutation
       {
-        insert_expense(objects: [{name: "${expense.name}", description: "${expense.description}", amount: ${expense.amount}, date: "2018-11-01", user_id: ${expense.userID}}]) {
+        insert_expense(objects: [{
+          name: "${expense.name}",
+          description: "${expense.description}",
+          amount: ${expense.amount},
+          date: "${expense.date}",
+          user_id: ${expense.userID}
+        }]) {
           returning {
             id
             name
@@ -64,7 +82,65 @@ export const addExpense = (expense) => {
       }
     `
   }
-  console.log(query)
+
+  // return callDB(query);
+
+  return fetch(api, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(query),
+  })
+    .then(res => res.json())
+    .catch(e => console.log(e))
+}
+
+export const updateExpense = (expense) => {
+  const query = {
+    'query': `mutation
+      {
+        update_expense(
+          where: {id: {_eq: ${expense.id}}},
+          _set: {
+            name: "${expense.name}"
+            description: "${expense.description}"
+            amount: ${expense.amount}
+            date: "${expense.date}"
+          }
+        ) {
+          affected_rows 
+        }
+      }
+    `
+  }
+
+  // return callDB(query);
+
+  return fetch(api, {
+    method: 'POST',
+    headers,
+    body: JSON.stringify(query),
+  })
+    .then(res => res.json())
+    .catch(e => console.log(e))
+}
+
+export const deleteExpense = (expense) => {
+  const query = {
+    'query': `
+      mutation {
+        delete_expense(
+          where: {id: {_eq: ${expense.id}}}
+        ) {
+          affected_rows
+          returning {
+            id
+          }
+        }
+      }
+    `
+  }
+
+  // return callDB(query);
 
   return fetch(api, {
     method: 'POST',
