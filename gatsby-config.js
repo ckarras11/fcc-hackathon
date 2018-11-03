@@ -27,9 +27,7 @@ module.exports = {
     },
     {
       resolve: `@wapps/gatsby-plugin-material-ui`,
-      options: {
-        // Add any options here
-      },
+      options: {},
     },
     'gatsby-plugin-offline',
     'gatsby-plugin-netlify-identity-widget',
