@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-
+import Login from '../components/login'
 import Header from '../components/header'
 import './index.css'
 
@@ -23,6 +23,7 @@ const Layout = ({ children, data }) => (
         paddingTop: 0,
       }}
     >
+      <Login />
       {children()}
     </div>
   </div>
