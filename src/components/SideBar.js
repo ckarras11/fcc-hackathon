@@ -34,8 +34,7 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    background:
-      ' linear-gradient(to left, #b7b3a5, #c3c0b5, #cfcec6, #dcdbd6, #e9e9e7);',
+    background: ' linear-gradient(135deg, #fff8dc 0%, #ffdead 100%)',
   },
   menuButton: {
     marginRight: 20,
