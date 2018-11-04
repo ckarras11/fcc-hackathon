@@ -26,6 +26,11 @@ const Layout = ({ children }) => (
             { name: 'keywords', content: 'sample, something' },
           ]}
         >
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@latest/dist/all.css"
+            crossorigin="anonymous"
+          />
           <html lang="en" />
         </Helmet>
 
