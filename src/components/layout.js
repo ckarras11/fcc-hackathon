@@ -1,58 +1,28 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-import SideBar from './SideBar'
-import './layout.css'
+import SideBar from './SideBar';
+import './layout.css';
 
-const Layout = ({ children }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        >
-          <link
-            rel="stylesheet"
-            href="https://cdn.jsdelivr.net/npm/@progress/kendo-theme-default@latest/dist/all.css"
-            crossorigin="anonymous"
-          />
-          <html lang="en" />
-        </Helmet>
-
-        <SideBar>
-          <div
-            style={{
-              margin: '0 auto',
-              maxWidth: 960,
-              padding: '0px 1.0875rem 1.45rem',
-              paddingTop: 0,
-            }}
-          >
-            {children}
-          </div>
-        </SideBar>
-      </>
-    )}
-  />
-)
+const Layout = ({ children }) => {
+	return (
+		<SideBar>
+			<div
+				style={{
+					margin: '0 auto',
+					maxWidth: 960,
+					padding: '0px 1.0875rem 1.45rem',
+					paddingTop: 0
+				}}
+			>
+				{children}
+			</div>
+		</SideBar>
+	);
+};
 
 Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
+	children: PropTypes.node.isRequired
+};
 
-export default Layout
+export default Layout;

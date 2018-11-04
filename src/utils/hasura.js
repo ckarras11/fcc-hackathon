@@ -1,10 +1,7 @@
-require('es6-promise').polyfill()
-require('isomorphic-fetch')
-
-const api = 'https://spare-change-jamstack.herokuapp.com/v1alpha1/graphql'
+const api = 'https://spare-change-jamstack.herokuapp.com/v1alpha1/graphql';
 const headers = {
-  'Content-Type': 'application/json',
-}
+	'Content-Type': 'application/json'
+};
 
 // const callDB = (query) => {
 //   return fetch(api, {
@@ -16,8 +13,8 @@ const headers = {
 // }
 
 export const getExpenses = userID => {
-  const query = {
-    query: `
+	const query = {
+		query: `
     {
       expense (
         where: {user_id: {_eq: ${userID} }}
@@ -26,23 +23,23 @@ export const getExpenses = userID => {
         name
         description
       }
-    }`,
-  }
+    }`
+	};
 
-  // return callDB(query);
+	// return callDB(query);
 
-  return fetch(api, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(query),
-  })
-    .then(res => res.json())
-    .catch(e => console.log(e))
-}
+	return fetch(api, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(query)
+	})
+		.then(res => res.json())
+		.catch(e => console.log(e));
+};
 
 export const getAllExpenses = () => {
-  const query = {
-    query: `
+	const query = {
+		query: `
     {
       expense {
       id
@@ -50,23 +47,23 @@ export const getAllExpenses = () => {
       description
       user_id
       }
-    }`,
-  }
+    }`
+	};
 
-  // return callDB(query);
+	// return callDB(query);
 
-  return fetch(api, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(query),
-  })
-    .then(res => res.json())
-    .catch(e => console.log(e))
-}
+	return fetch(api, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(query)
+	})
+		.then(res => res.json())
+		.catch(e => console.log(e));
+};
 
 export const addExpense = expense => {
-  const query = {
-    query: `mutation
+	const query = {
+		query: `mutation
       {
         insert_expense(objects: [{
           name: "${expense.name}",
@@ -83,23 +80,23 @@ export const addExpense = expense => {
           }
         }
       }
-    `,
-  }
+    `
+	};
 
-  // return callDB(query);
+	// return callDB(query);
 
-  return fetch(api, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(query),
-  })
-    .then(res => res.json())
-    .catch(e => console.log(e))
-}
+	return fetch(api, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(query)
+	})
+		.then(res => res.json())
+		.catch(e => console.log(e));
+};
 
 export const updateExpense = expense => {
-  const query = {
-    query: `mutation
+	const query = {
+		query: `mutation
       {
         update_expense(
           where: {id: {_eq: ${expense.id}}},
@@ -113,23 +110,23 @@ export const updateExpense = expense => {
           affected_rows 
         }
       }
-    `,
-  }
+    `
+	};
 
-  // return callDB(query);
+	// return callDB(query);
 
-  return fetch(api, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(query),
-  })
-    .then(res => res.json())
-    .catch(e => console.log(e))
-}
+	return fetch(api, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(query)
+	})
+		.then(res => res.json())
+		.catch(e => console.log(e));
+};
 
 export const deleteExpense = expense => {
-  const query = {
-    query: `
+	const query = {
+		query: `
       mutation {
         delete_expense(
           where: {id: {_eq: ${expense.id}}}
@@ -140,16 +137,16 @@ export const deleteExpense = expense => {
           }
         }
       }
-    `,
-  }
+    `
+	};
 
-  // return callDB(query);
+	// return callDB(query);
 
-  return fetch(api, {
-    method: 'POST',
-    headers,
-    body: JSON.stringify(query),
-  })
-    .then(res => res.json())
-    .catch(e => console.log(e))
-}
+	return fetch(api, {
+		method: 'POST',
+		headers,
+		body: JSON.stringify(query)
+	})
+		.then(res => res.json())
+		.catch(e => console.log(e));
+};
