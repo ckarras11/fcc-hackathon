@@ -17,8 +17,10 @@ const Dashboard = ({ data }) => {
 
   return (
     <Layout>
-      <h1>Dashboard</h1>
-      <p>Welcome to dashboard</p>
+      <div className="page__title">
+        <h1>Dashboard</h1>
+        <p>Here is an overview of your expenses</p>
+      </div>
       <div className="dashboard__overview">
         <Donut data={data} />
         <div className="dashboard__totals">

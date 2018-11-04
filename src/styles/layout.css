@@ -649,3 +649,15 @@ img {
     margin-right: 0;
   }
 }
+
+.page__title {
+  text-align: left;
+}
+.page__title > h1 {
+  margin-bottom: 5px;
+}
+
+.page__title > p {
+  color: #777;
+  margin-bottom: 0;
+}
