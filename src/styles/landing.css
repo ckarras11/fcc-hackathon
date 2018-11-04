@@ -10,10 +10,10 @@ a {
   text-decoration: none;
 }
 
-header {
+.container-global > header {
   padding: 10px;
 }
-svg {
+.container-global > svg {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -54,9 +54,28 @@ svg {
   margin: 50px auto;
 }
 
-.card {
-  max-width: 250px;
+.container-cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
 }
+
+.card {
+  min-width: 250px;
+  max-width: 300px;
+  margin: 15px;
+}
+
+footer {
+  margin: 15px;
+  text-align: center;
+}
+
+.footer-message {
+  font-size: 0.6em;
+  line-height: 1.2em;
+}
+
 @media (max-width: 700px) {
   .main-landing {
     flex-direction: column;
