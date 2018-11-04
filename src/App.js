@@ -27,9 +27,9 @@ class App extends Component {
         isAuthenticated: true,
       })
 
-      getExpenses(netlifyIdentity.currentUser().id).then(data =>
-        this.setState({ expenses: data.data.expense })
-      )
+      getExpenses(netlifyIdentity.currentUser().id)
+        .then(data => this.setState({ expenses: data.data.expense }))
+        .catch(e => console.log(e))
     }
   }
 
@@ -52,14 +52,12 @@ class App extends Component {
   addNewExpense = expense => {
     let expenseWithUserID = expense
     expenseWithUserID.userID = netlifyIdentity.currentUser().id
-    console.log(expenseWithUserID)
     addExpense(expenseWithUserID)
       .then(res => {
-        console.log(res)
         expenseWithUserID.id = res.data.insert_expense.returning[0].id
+        this.setState({ expenses: [...this.state.expenses, expenseWithUserID] })
       })
       .catch(e => console.log(e))
-    this.setState({ expenses: [...this.state.expenses, expenseWithUserID] })
   }
 
   render() {
@@ -86,11 +84,11 @@ class App extends Component {
             />
             <Route
               path="/expenses"
-              render={() => (
-                <Expenses
-                  expenses={this.state.expenses}
-                  onAddExpense={this.addNewExpense}
-                />
+              component={requireAuth(
+                Expenses,
+                this.state.expenses,
+                this.state.isAuthenticated,
+                this.addNewExpense
               )}
             />
 
