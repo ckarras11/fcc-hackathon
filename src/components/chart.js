@@ -1,5 +1,9 @@
 import React from 'react'
-import 'hammerjs'
+
+if (typeof window !== 'undefined') {
+  require('hammerjs')
+}
+
 import {
   Chart,
   ChartLegend,
