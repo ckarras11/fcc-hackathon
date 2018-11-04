@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Router, Route } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 
 import netlifyIdentity from 'netlify-identity-widget'
 
 import LandingPage from './views/Landing'
 import Dashboard from './views/Dashboard'
 import Expenses from './views/Expenses'
+import NotFoundPage from './views/404'
 import { getExpenses, addExpense } from './utils/hasura'
 import history from './utils/history'
 import './App.css'
@@ -67,30 +68,34 @@ class App extends Component {
     return (
       <Router history={history}>
         <div className="App">
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <LandingPage isAuthenticated={this.state.isAuthenticated} />
-            )}
-          />
-          <Route
-            path="/dashboard"
-            component={requireAuth(
-              Dashboard,
-              this.state.expenses,
-              this.state.isAuthenticated
-            )}
-          />
-          <Route
-            path="/expenses"
-            render={() => (
-              <Expenses
-                expenses={this.state.expenses}
-                onAddExpense={this.addNewExpense}
-              />
-            )}
-          />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={() => (
+                <LandingPage isAuthenticated={this.state.isAuthenticated} />
+              )}
+            />
+            <Route
+              path="/dashboard"
+              component={requireAuth(
+                Dashboard,
+                this.state.expenses,
+                this.state.isAuthenticated
+              )}
+            />
+            <Route
+              path="/expenses"
+              render={() => (
+                <Expenses
+                  expenses={this.state.expenses}
+                  onAddExpense={this.addNewExpense}
+                />
+              )}
+            />
+
+            <Route component={NotFoundPage} />
+          </Switch>
         </div>
       </Router>
     )
