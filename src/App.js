@@ -1,32 +1,100 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import React, { Component } from 'react'
+import { Router, Route } from 'react-router-dom'
 
-import LandingPage from './views/Landing';
-import Dashboard from './views/Dashboard';
-import Expenses from './views/Expenses';
+import netlifyIdentity from 'netlify-identity-widget'
 
-import './App.css';
-import withRoot from './withRoot';
+import LandingPage from './views/Landing'
+import Dashboard from './views/Dashboard'
+import Expenses from './views/Expenses'
+import { getExpenses, addExpense } from './utils/hasura'
+import history from './utils/history'
+import './App.css'
+import withRoot from './withRoot'
+import requireAuth from './utils/requireAuth'
 
 class App extends Component {
-	render() {
-		return (
-			<Router>
-				<div className="App">
-					<Route exact path="/" component={LandingPage} />
-					<Route path="/dashboard" component={Dashboard} />
-					<Route path="/expenses" component={Expenses} />
-					{/* <Route path="/login" component={LoginPage} />
-						<Route path="/register" component={RegisterPage} />
-						<Route path="/faq" component={Faq} />
-						<Route path="/terms" component={Terms} />
-						<Route path="/privacy" component={Privacy} />
-						<Route path="/profile" component={requireAuth(ProfilePage)} />
-						<Route path="/browse" component={requireAuth(Grid)} /> */}
-				</div>
-			</Router>
-		);
-	}
+  state = {
+    expenses: [],
+    userID: '',
+    isAuthenticated: false,
+  }
+
+  componentWillMount() {
+    if (netlifyIdentity.currentUser()) {
+      this.setState({
+        userID: netlifyIdentity.currentUser().id,
+        isAuthenticated: true,
+      })
+
+      getExpenses(netlifyIdentity.currentUser().id).then(data =>
+        this.setState({ expenses: data.data.expense })
+      )
+    }
+  }
+
+  handleLogin = () => {
+    this.setState({
+      isAuthenticated: true,
+      userID: netlifyIdentity.currentUser().id,
+    })
+    getExpenses(this.state.userID)
+      .then(data => this.setState({ expenses: data.data.expense }))
+      .catch(e => console.error(e))
+    history.push('/dashboard')
+    netlifyIdentity.close()
+  }
+
+  handleLogout = () => {
+    this.setState({ isAuthenticated: false, expenses: [], userID: '' })
+  }
+
+  addNewExpense = expense => {
+    let expenseWithUserID = expense
+    expenseWithUserID.userID = netlifyIdentity.currentUser().id
+    console.log(expenseWithUserID)
+    addExpense(expenseWithUserID)
+      .then(res => {
+        console.log(res)
+        expenseWithUserID.id = res.data.insert_expense.returning[0].id
+      })
+      .catch(e => console.log(e))
+    this.setState({ expenses: [...this.state.expenses, expenseWithUserID] })
+  }
+
+  render() {
+    netlifyIdentity.on('login', this.handleLogin)
+    netlifyIdentity.on('logout', this.handleLogout)
+    return (
+      <Router history={history}>
+        <div className="App">
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <LandingPage isAuthenticated={this.state.isAuthenticated} />
+            )}
+          />
+          <Route
+            path="/dashboard"
+            component={requireAuth(
+              Dashboard,
+              this.state.expenses,
+              this.state.isAuthenticated
+            )}
+          />
+          <Route
+            path="/expenses"
+            render={() => (
+              <Expenses
+                expenses={this.state.expenses}
+                onAddExpense={this.addNewExpense}
+              />
+            )}
+          />
+        </div>
+      </Router>
+    )
+  }
 }
 
-export default withRoot(App);
+export default withRoot(App)
