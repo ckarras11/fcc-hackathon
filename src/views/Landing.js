@@ -57,10 +57,10 @@ const LandingPage = ({ classes, isAuthenticated }) => (
       </div>
       <Card className="card">
         <CardContent>
-          <h1>Card 2</h1>
+          <h2>Overview</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            This app helps you keep track of expenses and gives you a visual
+            representation of your spending.
           </p>
         </CardContent>
       </Card>
