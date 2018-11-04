@@ -1,3 +1,6 @@
+require('es6-promise').polyfill()
+require('isomorphic-fetch')
+
 const api = 'https://spare-change-jamstack.herokuapp.com/v1alpha1/graphql'
 const headers = {
   'Content-Type': 'application/json',
@@ -12,9 +15,9 @@ const headers = {
 //   .catch(e => console.log(e))
 // }
 
-export const getExpenses = (userID) => {
+export const getExpenses = userID => {
   const query = {
-    'query': `
+    query: `
     {
       expense (
         where: {user_id: {_eq: ${userID} }}
@@ -23,7 +26,7 @@ export const getExpenses = (userID) => {
         name
         description
       }
-    }`
+    }`,
   }
 
   // return callDB(query);
@@ -39,7 +42,7 @@ export const getExpenses = (userID) => {
 
 export const getAllExpenses = () => {
   const query = {
-    'query': `
+    query: `
     {
       expense {
       id
@@ -47,7 +50,7 @@ export const getAllExpenses = () => {
       description
       user_id
       }
-    }`
+    }`,
   }
 
   // return callDB(query);
@@ -61,9 +64,9 @@ export const getAllExpenses = () => {
     .catch(e => console.log(e))
 }
 
-export const addExpense = (expense) => {
+export const addExpense = expense => {
   const query = {
-    'query': `mutation
+    query: `mutation
       {
         insert_expense(objects: [{
           name: "${expense.name}",
@@ -80,7 +83,7 @@ export const addExpense = (expense) => {
           }
         }
       }
-    `
+    `,
   }
 
   // return callDB(query);
@@ -94,9 +97,9 @@ export const addExpense = (expense) => {
     .catch(e => console.log(e))
 }
 
-export const updateExpense = (expense) => {
+export const updateExpense = expense => {
   const query = {
-    'query': `mutation
+    query: `mutation
       {
         update_expense(
           where: {id: {_eq: ${expense.id}}},
@@ -110,7 +113,7 @@ export const updateExpense = (expense) => {
           affected_rows 
         }
       }
-    `
+    `,
   }
 
   // return callDB(query);
@@ -124,9 +127,9 @@ export const updateExpense = (expense) => {
     .catch(e => console.log(e))
 }
 
-export const deleteExpense = (expense) => {
+export const deleteExpense = expense => {
   const query = {
-    'query': `
+    query: `
       mutation {
         delete_expense(
           where: {id: {_eq: ${expense.id}}}
@@ -137,7 +140,7 @@ export const deleteExpense = (expense) => {
           }
         }
       }
-    `
+    `,
   }
 
   // return callDB(query);
