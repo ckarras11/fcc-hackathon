@@ -23,7 +23,7 @@ const renderTooltip = context => {
 }
 
 const Donut = ({ data }) => (
-  <Chart>
+  <Chart style={{ height: 300 }}>
     <ChartTooltip render={renderTooltip} />
     <ChartSeries>
       <ChartSeriesItem
