@@ -1,9 +1,5 @@
 import React from 'react'
 
-if (typeof window !== 'undefined') {
-  require('hammerjs')
-}
-
 import {
   Chart,
   ChartLegend,
@@ -14,6 +10,9 @@ import {
   ChartSeriesLabels,
 } from '@progress/kendo-react-charts'
 
+if (typeof window !== 'undefined') {
+  require('hammerjs')
+}
 const labelContent = e => e.category
 
 const renderTooltip = context => {
