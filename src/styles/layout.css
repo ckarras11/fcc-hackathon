@@ -627,6 +627,10 @@ img {
   margin-bottom: 0;
 }
 
+.form-add-expense {
+  min-height: 330px;
+}
+
 .form__wrapper {
   display: flex;
   align-items: flex-end;
