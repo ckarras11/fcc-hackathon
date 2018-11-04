@@ -3,18 +3,9 @@ const headers = {
   'Content-Type': 'application/json',
 }
 
-// const callDB = (query) => {
-//   return fetch(api, {
-//   headers,
-//   body: JSON.stringify(query)
-// })
-//   .then(res => res.json())
-//   .catch(e => console.log(e))
-// }
-
 export const getExpenses = userID => {
   const query = {
-    'query': `
+    query: `
     {
       expense (
         where: {user_id: {_eq: "${userID}" }}
@@ -28,8 +19,6 @@ export const getExpenses = userID => {
     }`,
   }
 
-  // return callDB(query);
-
   return fetch(api, {
     method: 'POST',
     headers,
@@ -42,7 +31,7 @@ export const getExpenses = userID => {
 
 export const getAllExpenses = () => {
   const query = {
-    'query': `
+    query: `
     {
       expense {
       id
@@ -52,8 +41,6 @@ export const getAllExpenses = () => {
       }
     }`,
   }
-
-  // return callDB(query);
 
   return fetch(api, {
     method: 'POST',
@@ -66,7 +53,7 @@ export const getAllExpenses = () => {
 
 export const addExpense = expense => {
   const query = {
-    'query': `mutation
+    query: `mutation
       {
         insert_expense(objects: [{
           name: "${expense.name}",
@@ -87,7 +74,6 @@ export const addExpense = expense => {
     `,
   }
 
-  // return callDB(query);
   console.log(query)
 
   return fetch(api, {
@@ -101,7 +87,7 @@ export const addExpense = expense => {
 
 export const updateExpense = expense => {
   const query = {
-    'query': `mutation
+    query: `mutation
       {
         update_expense(
           where: {id: {_eq: ${expense.id}}},
@@ -119,8 +105,6 @@ export const updateExpense = expense => {
     `,
   }
 
-  // return callDB(query);
-
   return fetch(api, {
     method: 'POST',
     headers,
@@ -132,7 +116,7 @@ export const updateExpense = expense => {
 
 export const deleteExpense = expense => {
   const query = {
-    'query': `
+    query: `
       mutation {
         delete_expense(
           where: {id: {_eq: ${expense.id}}}
@@ -145,8 +129,6 @@ export const deleteExpense = expense => {
       }
     `,
   }
-
-  // return callDB(query);
 
   return fetch(api, {
     method: 'POST',

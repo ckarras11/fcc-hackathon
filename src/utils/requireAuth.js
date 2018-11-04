@@ -2,7 +2,12 @@ import React, { Component } from 'react'
 import netlifyIdentity from 'netlify-identity-widget'
 import history from './history'
 
-export default function requireAuth(ComposedComponent, data, isAuthenticated) {
+export default function requireAuth(
+  ComposedComponent,
+  data,
+  isAuthenticated,
+  add = ''
+) {
   class Authenticate extends Component {
     componentWillMount() {
       if (!isAuthenticated) {
@@ -12,7 +17,7 @@ export default function requireAuth(ComposedComponent, data, isAuthenticated) {
     }
 
     render() {
-      return <ComposedComponent data={data} />
+      return <ComposedComponent data={data} onAddExpense={add} />
     }
   }
 

@@ -10,67 +10,24 @@ export default class Expenses extends Component {
     modal: false,
     item: {},
   }
-  openEdit = e => {
-    console.log('click')
-    this.setState({
-      modal: true,
-      item: e,
-    })
-  }
 
   render() {
-    let test
-    this.state.modal ? (test = <FormDialog open edit />) : (test = '')
     return (
       <Layout>
-        {test}
         <h1>Expenses</h1>
         <p>Welcome to expenses!</p>
         <List component="nav">
-          {this.props.expenses &&
-            this.props.expenses.map(expense => (
-              <ListItem
-                button
-                key={expense.id}
-                /* onClick={e => <FormDialog open edit name={expense.name} />} */
-                // onClick={e => console.log(expense)}
-                onClick={e => this.openEdit(e)}
-              >
+          {this.props.data &&
+            this.props.data.map(expense => (
+              <ListItem button key={expense.id}>
                 <ListItemText>
                   {expense.name} - ${expense.amount}
                 </ListItemText>
               </ListItem>
             ))}
         </List>
-        <FormDialog onAddExpense={this.props.onAddExpense} add={true} />
+        <FormDialog onAddExpense={this.props.onAddExpense} />
       </Layout>
     )
   }
 }
-
-/* const Expenses = props => {
-  console.log(modal)
-  return (
-    <Layout>
-      <h1>Expenses</h1>
-      <p>Welcome to expenses!</p>
-      <List component="nav">
-        {props.expenses &&
-          props.expenses.map(expense => (
-            <ListItem
-              button
-              key={expense.id}
-              
-            >
-              <ListItemText>
-                {expense.name} - ${expense.amount}
-              </ListItemText>
-            </ListItem>
-          ))}
-      </List>
-      <FormDialog onAddExpense={props.onAddExpense} add={true} />
-    </Layout>
-  )
-}
-
-export default Expenses */

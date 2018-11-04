@@ -41,7 +41,7 @@ export default class FormDialog extends React.Component {
         name: this.state.name,
         description: this.state.description,
         date: this.state.date,
-        amount: parseInt(this.state.amount),
+        amount: parseFloat(this.state.amount),
         type: this.state.type,
       }
       this.props.onAddExpense(expense)
@@ -53,7 +53,6 @@ export default class FormDialog extends React.Component {
 
   onChange = e => {
     this.setState({ [e.target.name]: e.target.value })
-    // console.log(e.target.name + ': ' + e.target.value)
   }
 
   render() {
@@ -140,20 +139,16 @@ export default class FormDialog extends React.Component {
             <Button onClick={this.handleClose} color="primary">
               Cancel
             </Button>
-            {this.state.add && (
-              <Button onClick={this.addExpense} color="primary">
-                Add
-              </Button>
-            )}
+            <Button onClick={this.addExpense} color="primary">
+              Add
+            </Button>
             {this.state.edit && (
               <Button onClick={this.addExpense} color="primary">
                 Edit
               </Button>
             )}
             {this.state.edit && (
-              <Button onClick={this.addExpense} color="secondary">
-                Delete
-              </Button>
+              <Button onClick={this.addExpense} color="secondary" />
             )}
           </DialogActions>
         </Dialog>
