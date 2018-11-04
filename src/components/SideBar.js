@@ -14,11 +14,13 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import HomeIcon from '@material-ui/icons/Home'
+import MoneyIcon from '@material-ui/icons/AttachMoney'
 import MenuItem from '@material-ui/core/MenuItem'
 import Menu from '@material-ui/core/Menu'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import { Link } from 'react-router-dom'
-/* import Logo from './logo'; */
+import netlifyIdentity from 'netlify-identity-widget'
+import history from '../utils/history'
 
 const drawerWidth = 220
 
@@ -62,16 +64,17 @@ class SideBar extends React.Component {
     }
   }
 
-  handleChange = event => {
-    this.setState({ auth: event.target.checked })
-  }
-
   handleMenu = event => {
     this.setState({ anchorEl: event.currentTarget })
   }
 
   handleClose = () => {
     this.setState({ anchorEl: null })
+  }
+
+  handleLogout = () => {
+    netlifyIdentity.logout()
+    history.push('/')
   }
 
   handleDrawerToggle = () => {
@@ -98,7 +101,7 @@ class SideBar extends React.Component {
             >
               <ListItem button>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <HomeIcon /> : <HomeIcon />}
+                  {index % 2 === 0 ? <HomeIcon /> : <MoneyIcon />}
                 </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
@@ -153,8 +156,7 @@ class SideBar extends React.Component {
                   open={open}
                   onClose={this.handleClose}
                 >
-                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
-                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleLogout}>Logout</MenuItem>
                 </Menu>
               </div>
             )}
@@ -201,8 +203,6 @@ class SideBar extends React.Component {
 
 SideBar.propTypes = {
   classes: PropTypes.object.isRequired,
-  // Injected by the documentation to work in an iframe.
-  // You won't need it on your project.
   container: PropTypes.object,
   theme: PropTypes.object.isRequired,
 }
