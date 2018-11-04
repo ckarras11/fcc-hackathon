@@ -7,16 +7,14 @@ import {
   ChartSeries,
   ChartSeriesItem,
   ChartTooltip,
-  ChartSeriesLabels,
 } from '@progress/kendo-react-charts'
 
 if (typeof window !== 'undefined') {
   require('hammerjs')
 }
-const labelContent = e => e.category
 
 const renderTooltip = context => {
-  const { category, series, value } = context.point || context
+  const { category, value } = context.point || context
   return (
     <div>
       {category} : {value}
@@ -31,15 +29,9 @@ const Donut = ({ data }) => (
       <ChartSeriesItem
         type="donut"
         data={data}
-        categoryField="kind"
-        field="value"
-      >
-        <ChartSeriesLabels
-          color="#fff"
-          background="none"
-          content={labelContent}
-        />
-      </ChartSeriesItem>
+        categoryField="key"
+        field="amount"
+      />
     </ChartSeries>
     <ChartArea background="none" />
     <ChartLegend visible={true} />
