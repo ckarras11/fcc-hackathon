@@ -2,19 +2,11 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
-import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
 
-// import {
-//   getAllExpenses,
-//   getExpenses,
-//   addExpense,
-//   updateExpense,
-//   deleteExpense,
-// } from '../utils/hasura'
 import '../styles/landing.css'
 
-const LandingPage = ({ classes }) => (
+const LandingPage = ({ classes, isAuthenticated }) => (
   <React.Fragment>
     <div className="container-global">
       <header>
@@ -32,7 +24,7 @@ const LandingPage = ({ classes }) => (
 
           <Link to="/Dashboard">
             <Button variant="contained" color="primary">
-              Dashboard
+              {isAuthenticated ? 'Dashboard' : 'Get Started'}
             </Button>
           </Link>
         </div>
@@ -54,18 +46,15 @@ const LandingPage = ({ classes }) => (
       </svg>
     </div>
     <section className="container-cards">
-      <Card className="card">
-        <CardContent>
-          <h1>Card 1</h1>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-          </p>
-        </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
+      <div className="card">
+        <h2>2018 FCC Hackathon</h2>
+        <p>
+          This project was created for the 2018 Free Code Camp Hackathon by{' '}
+          <a href="https://github.com/ckarras11/">Christopher Karras</a> and{' '}
+          <a href="https://github.com/divanoff">Dimo Ivanov</a>. It was built
+          using the JAMstack November 3rd and 4th.
+        </p>
+      </div>
       <Card className="card">
         <CardContent>
           <h1>Card 2</h1>
@@ -74,40 +63,12 @@ const LandingPage = ({ classes }) => (
             eiusmod tempor incididunt ut labore et dolore magna aliqua.
           </p>
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </section>
     <footer>
-      <p className="footer-message">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim
-        veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-        commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-        velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt
-        mollit anim id est laborum.
-      </p>
       <p>© 2018 SpareChange</p>
     </footer>
   </React.Fragment>
 )
-
-// getAllExpenses().then(res => console.log(res))
-// getExpenses(1).then(res => console.log(res))
-
-// const expense = {
-//   id: '13',
-//   name: 'Test from index.js',
-//   description: 'I hope this works :)',
-//   amount: 55.55,
-//   date: '2018-10-30',
-//   userID: 13,
-// }
-
-// deleteExpense(expense)
-//   .then(res => console.log(res))
-//   .catch(e => console.log(e))
 
 export default LandingPage
