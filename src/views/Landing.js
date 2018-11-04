@@ -4,19 +4,14 @@ import Button from '@material-ui/core/Button'
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import logo from '../images/SpareChange-logo.png'
-import hero from '../images/coinstack.png'
 
-/* import Logo from '../components/logo';
-import Hero from '../components/hero'; */
-
-import {
-  getAllExpenses,
-  getExpenses,
-  addExpense,
-  updateExpense,
-  deleteExpense,
-} from '../utils/hasura'
+// import {
+//   getAllExpenses,
+//   getExpenses,
+//   addExpense,
+//   updateExpense,
+//   deleteExpense,
+// } from '../utils/hasura'
 import '../styles/landing.css'
 
 const LandingPage = ({ classes }) => (
